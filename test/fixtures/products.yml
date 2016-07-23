@@ -11,3 +11,12 @@ two:
   description: MyText
   image_url: MyString
   price: 9.99
+  
+ruby:
+  title:        Programming Ruby 2.3.1
+  description:
+      Ruby is key of success Rails framework
+      bla bla bla
+      lorem ipsum.
+  price:        49.50
+  image_url:    ruby.png
