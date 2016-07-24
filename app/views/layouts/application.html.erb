@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Startapp by PW</title>
+  <title>Startapp by PW - a store</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 <body class='<%= controller.controller_name %>' >
-    
-<%= yield %>
+    <div id="banner">
+        <%= image_tag('logo.png') %>
+        <%= @page_title || 'Pragmatic Bookshelf' %>
+    </div>
+        <div id="columns">
+                <div id="side">
+                        <ul>
+                            <li><a href="http://www.wp.pl">Wp</a></li>
+                            <li><a href="http://www.google.pl">Questions</a></li>
+                            <li><a href="http://www.wp.pl">shit</a></li>
+                            <li><a href="http://www.wp.pl">wirusy</a></li>
+                    </ul>                    
+                            <span style="color: magenta">Genarated: <%= Time.now %></span>                            
+            </div>
+    </div>
+        <div id="main">      
+          <%= yield %>
+    </div>
 
 </body>
 </html>

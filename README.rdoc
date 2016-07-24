@@ -1,11 +1,13 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# This README would normally document whatever steps are necessary to get the
+# application up and running.
+
+Setup database.yml, do a rake db:migrate, rails server and you're ready to go
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version: tested with 2.3.1
 
 * System dependencies
 
