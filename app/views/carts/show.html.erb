@@ -1,0 +1,15 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<h2>Your cart contains:</h2>
+
+<ul>
+  <% @cart.line_items.each do |item| %>
+    <li><%= item.product.title %> </li>
+    <%= button_to "Delete line item", line_item_path(line_item_id: item.id), method: :delete, 
+          data: { confirm: "Are you sure?" } %>
+    <% end %>
+        
+</ul>
+<%= link_to 'Back', carts_path %>
