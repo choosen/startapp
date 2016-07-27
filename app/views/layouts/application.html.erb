@@ -6,25 +6,25 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class='<%= controller.controller_name %>' >
+<body class="<%= controller.controller_name %>">
     <div id="banner">
         <%= image_tag('logo.png') %>
         <%= @page_title || 'Pragmatic Bookshelf' %>
     </div>
         <div id="columns">
-                <div id="side">
-                        <ul>
-                            <li><a href="http://www.wp.pl">Wp</a></li>
-                            <li><a href="http://www.google.pl">Questions</a></li>
-                            <li><a href="http://www.wp.pl">shit</a></li>
-                            <li><a href="http://www.wp.pl">wirusy</a></li>
-                    </ul>                    
-                            <span style="color: magenta">Genarated: <%= Time.now %></span>                            
-            </div>
-    </div>
-        <div id="main">      
-          <%= yield %>
-    </div>
+          <div id="side">
+                  <ul>
+                          <li><a href="http://www.wp.pl">Wp</a></li>
+                          <li><a href="http://www.google.pl">Questions</a></li>
+                          <li><a href="http://www.wp.pl">shit</a></li>
+                          <li><a href="http://www.wp.pl">wirusy</a></li>
+                  </ul>                    
+                  <span style="color: magenta">Genarated: <%= Time.now %></span>                            
+          </div>
+          <div id="main">      
+                <%= yield %>
+          </div>
+        </div>
 
 </body>
 </html>
