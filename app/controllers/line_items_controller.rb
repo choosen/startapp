@@ -26,11 +26,12 @@ class LineItemsController < ApplicationController
   def create
     @cart = current_cart
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(product: product)
+    @line_item = @cart.add_product(product.id)
+    
 
     respond_to do |format|
       if @line_item.save        
-        format.html { redirect_to @line_item.cart,
+        format.html { redirect_to @cart,
           notice: 'Line item was successfully created. Items in cart [' + @cart.id.to_s + ']:' + @cart.line_items.count.to_s }
         format.json { render :show,
           status: :created, location: @line_item }
@@ -59,18 +60,26 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
-    line_item = LineItem.find(params[:line_item_id])
-    line_item.destroy
-    respond_to do |format|
-      format.html { redirect_to line_items_url, notice: 'Line item was successfully destroyed.' }
+    #line_item = LineItem.find(params[:line_item_id])
+    
+    #@cart = current_cart
+    @line_item.destroy
+    respond_to do |format|   
+      format.html { redirect_to :back, notice: 'Cart is smaller' }
       format.json { head :no_content }
     end
+    #redirect_to :back #(fallback_location: fallback_location)
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_line_item
-      @line_item = LineItem.find(params[:id])
+      begin
+        @line_item = LineItem.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+        logger.error "Attempt to get non existence line item #{params[:id]}"               
+        redirect_to store_url, notice: 'Invalid Line Item'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

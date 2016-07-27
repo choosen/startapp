@@ -16,10 +16,13 @@
                   <ul>
                           <li><a href="http://www.wp.pl">Wp</a></li>
                           <li><a href="http://www.google.pl">Questions</a></li>
-                          <li><a href="http://www.wp.pl">shit</a></li>
-                          <li><a href="http://www.wp.pl">wirusy</a></li>
+                          <li><a href="http://localhost:3000">main</a></li>
+                          <li> <%= link_to 'Producty', products_path() %>  </li>
                   </ul>                    
-                  <span style="color: magenta">Genarated: <%= Time.now %></span>                            
+                  <span style="color: magenta">Genarated: <%= Time.now %></span>  
+                  <span style="color: magenta">Your CartID= 
+                        <%= @current_cart_b_id %> 
+                  </span>
           </div>
           <div id="main">      
                 <%= yield %>

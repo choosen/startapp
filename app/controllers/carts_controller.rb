@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
@@ -9,7 +9,25 @@ class CartsController < ApplicationController
 
   # GET /carts/1
   # GET /carts/1.json
-  def show
+  def show    
+    
+    if @cart != current_cart
+      @show_cart_link = true
+    #else
+      #@show_cart_link = false        
+    end
+    begin
+      @cart = Cart.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      logger.error "Attempt to access invalid card #{params[:id]}"
+      redirect_to store_url, notice: 'Invalid cart'     
+    else
+      @current_cart_c_id = current_cart
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @cart.errors, status: :unprocessable_entity  }
+      end
+    end
   end
 
   # GET /carts/new
@@ -19,6 +37,7 @@ class CartsController < ApplicationController
 
   # GET /carts/1/edit
   def edit
+    #@cart = Cart.find(params[:id])
   end
 
   # POST /carts
@@ -39,7 +58,8 @@ class CartsController < ApplicationController
 
   # PATCH/PUT /carts/1
   # PATCH/PUT /carts/1.json
-  def update
+  def update    
+    #@cart = Cart.find(params[:id])
     respond_to do |format|
       if @cart.update(cart_params)
         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
@@ -54,9 +74,12 @@ class CartsController < ApplicationController
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
+    #@cart = current_cart
     @cart.destroy
+    session[:cart_id] = nil
+    
     respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+      format.html { redirect_to store_url, notice: 'Cart was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

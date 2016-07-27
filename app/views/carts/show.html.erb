@@ -2,14 +2,31 @@
 <p id="notice"><%= notice %></p>
 <% end %>
 
-<h2>Your cart contains:</h2>
+<%= @current_cart_c_id.id.to_s %>
+= yours cart
+<div class="cart_title">This cart [<%= @cart.id %>] contains:</div>
 
-<ul>
+<table>
   <% @cart.line_items.each do |item| %>
-    <li><%= item.product.title %> </li>
-    <%= button_to "Delete line item", line_item_path(line_item_id: item.id), method: :delete, 
-          data: { confirm: "Are you sure?" } %>
+    <tr>
+      <td><%= item.quantity %> &times; </td>
+      <td><%= item.product.title %> </td>
+      <td class="item_price"><%= number_to_currency(item.total_price) %></td>
+      <td><%= button_to "Delete", item, method: :delete,
+  data: { confirm: "Are you sure?" } %></td>
+    </tr>
     <% end %>
-        
-</ul>
-<%= link_to 'Back', carts_path %>
+    <tr class="total_line">
+        <td colspan = "2">Total</td>
+        <td colspan = "1" class="total_cell">
+          <%= number_to_currency(@cart.total_price) %>
+        </td>
+        <td></td>           
+    </tr>
+</table>
+
+<%= button_to "Empty Card", @cart, method: :delete, confirm: "Sure?" %>
+<%= link_to 'Back to store', store_path %>
+<% if @show_cart_link == true %>
+<%= link_to 'Back to Cards', carts_path %>
+<% end %>

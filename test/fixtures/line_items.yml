@@ -7,3 +7,8 @@ one:
 two:
   product_id: 1
   cart_id: 1
+
+moj:
+  product_id: 3
+  cart_id: 2
+  quantity: 3
