@@ -1,4 +1,4 @@
-# app ctr musi byc opis
+# app ctr must be an description
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   
   
     def current_cart
-      Cart.find(session[:card_id])
-      raise session[:card_id]
+#      raise session[:cart_id]
+      Cart.find(session[:cart_id])
     rescue ActiveRecord::RecordNotFound
       cart = Cart.create
       session[:cart_id] = cart.id
