@@ -7,4 +7,7 @@ class SayController < ApplicationController
   def goodbye
     @files = Dir.glob('*')
   end
+
+  def jquery
+  end
 end
